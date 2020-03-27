@@ -55,25 +55,28 @@ function openModal(e) {
     if (e.target.nodeName === "IMG") {
         refs.divLightbox.classList.add('is-open');
         refs.divLightbox.querySelector('.lightbox__image').src = e.target.dataset.source;
-        window.addEventListener('keydown', closeModal);
+        window.addEventListener('keydown', handleKeyPress);
     }
+
 }
 
-refs.divLightbox.addEventListener('click', closeModal);
+refs.divLightbox.addEventListener('click', handleClickModal);
 
 
-
-function closeModal(e) {
+function handleClickModal(e) {
+    console.log(e)
     if (e.target.nodeName !== "IMG") {
-        refs.divLightbox.classList.remove('is-open');
-        refs.divLightbox.querySelector('.lightbox__image').src = '';
-        window.removeEventListener('keydown', handleKeyPress);
+        closeModal();
     }
 }
 
+function closeModal() {
+    refs.divLightbox.classList.remove('is-open');
+    refs.divLightbox.querySelector('.lightbox__image').src = '';
+    window.removeEventListener('keydown', handleKeyPress);
+}
 
-
-function handleKeyPress(e) {
+function handleKeyPress(event) {
     if (event.code !== 'Escape') {
         return;
     }
