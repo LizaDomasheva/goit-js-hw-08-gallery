@@ -10,7 +10,11 @@ const refs = {
 
 // ?RENDER GALLERY
 
-function renderGallery ({preview, original, description}) {
+function renderGallery({
+    preview,
+    original,
+    description
+}) {
     return `
     <li class="gallery__item">
   <a
@@ -27,9 +31,9 @@ function renderGallery ({preview, original, description}) {
     `
 }
 
-function createGallery (arr) {
+function createGallery(arr) {
     return arr.map(element => {
-        return renderGallery (element);
+        return renderGallery(element);
     }).join('');
 }
 
@@ -41,24 +45,19 @@ function addToHTML(parent, builder) {
 addToHTML(refs.gallery, createGallery(galleryItems))
 
 // ?EVENTS HANDELING
-const overlay = document.querySelector('.lightbox__overlay');
-
 
 refs.gallery.addEventListener('click', openModal)
 
 
 
 function openModal(e) {
-e.preventDefault();
-if (e.target.nodeName === "IMG") {
-refs.divLightbox.classList.add('is-open');
-refs.divLightbox.querySelector('.lightbox__image').src = e.target.dataset.source;
-window.addEventListener('keydown', handleKeyPress);
+    e.preventDefault();
+    if (e.target.nodeName === "IMG") {
+        refs.divLightbox.classList.add('is-open');
+        refs.divLightbox.querySelector('.lightbox__image').src = e.target.dataset.source;
+        window.addEventListener('keydown', closeModal);
+    }
 }
-}
-
-
-
 
 refs.closeModalBtn.addEventListener('click', closeModal);
 
@@ -68,20 +67,17 @@ refs.divLightbox.addEventListener('click', closeModal);
 
 function closeModal(e) {
     if (e.target.nodeName !== "IMG") {
-refs.divLightbox.classList.remove('is-open');
-refs.divLightbox.querySelector('.lightbox__image').src = '';
-window.removeEventListener('keydown', handleKeyPress);
+        refs.divLightbox.classList.remove('is-open');
+        refs.divLightbox.querySelector('.lightbox__image').src = '';
+        window.removeEventListener('keydown', handleKeyPress);
     }
 }
 
 
 
-function handleKeyPress(e){
-if(event.code !== 'Escape') {
-    return;
+function handleKeyPress(e) {
+    if (event.code !== 'Escape') {
+        return;
+    }
+    closeModal();
 }
-closeModal();
- }
-
-
-
