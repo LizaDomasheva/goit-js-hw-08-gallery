@@ -64,7 +64,6 @@ refs.divLightbox.addEventListener('click', handleClickModal);
 
 
 function handleClickModal(e) {
-    console.log(e)
     if (e.target.nodeName !== "IMG") {
         closeModal();
     }
