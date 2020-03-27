@@ -59,8 +59,6 @@ function openModal(e) {
     }
 }
 
-refs.closeModalBtn.addEventListener('click', closeModal);
-
 refs.divLightbox.addEventListener('click', closeModal);
 
 
